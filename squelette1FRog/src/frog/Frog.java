@@ -39,7 +39,7 @@ public class Frog implements IFrog {
 				if(x > 0) x--;
 			}
 			case right -> {
-				if(x < game.width) x++;
+				if(x < game.width - 1) x++;
 			}
 		}
 		this.direction = key;
