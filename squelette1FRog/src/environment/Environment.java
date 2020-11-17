@@ -20,9 +20,20 @@ public class Environment implements IEnvironment {
         this.game = game;
         this.lanes = new ArrayList<>();
         boolean leftToRight = false;
-        for (int i = 1; i < game.height - 1; i += 2) {
-            lanes.add(new Lane(game, i, leftToRight));
-            lanes.add(new Lane(game, i + 1, leftToRight));
+
+        int counter = 1;
+        while(counter < game.height-1){
+            double proba = game.randomGen.nextDouble();
+            int nbOfLanes;
+            if (proba < 0.25) nbOfLanes = 1;
+            else if(proba < 0.75) nbOfLanes = 2;
+            else nbOfLanes = 3;
+
+            for(int i = 0; i < nbOfLanes; i++){
+                lanes.add(new Lane(game, counter, leftToRight));
+                counter++;
+                if(counter == game.height - 1) break;
+            }
             leftToRight = !leftToRight;
         }
     }

@@ -26,9 +26,21 @@ public class Lane {
         this.game = game;
         this.yCoord = yCoord;
         this.leftToRight = leftToRight;
-        this.speed = game.randomGen.nextInt(5) + game.minSpeedInTimerLoops;
+        this.speed = game.randomGen.nextInt(7) + game.minSpeedInTimerLoops;
         this.countdown = speed;
-        this.density = (game.randomGen.nextInt(70) + 5) / 100.0f;
+        this.density = (game.randomGen.nextInt(40) + 10) / 100.0f;
+
+        initialize();
+    }
+
+    /**
+     * Ajoute des voitures selon la densité de la voie et sans les afficher
+     */
+    private void initialize() {
+        for(int i = 0; i < game.width; i++){
+            for (Car c: cars) c.move();
+            mayAddCar();
+        }
     }
 
     /**
