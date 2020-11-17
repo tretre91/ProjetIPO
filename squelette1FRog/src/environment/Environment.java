@@ -11,6 +11,11 @@ public class Environment implements IEnvironment {
     private Game game;
     private ArrayList<Lane> lanes;
 
+    /**
+     * Crée un environnement
+     *
+     * @param game Une partie de jeu
+     */
     public Environment(Game game) {
         this.game = game;
         this.lanes = new ArrayList<>();
