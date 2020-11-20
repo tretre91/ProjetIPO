@@ -7,5 +7,5 @@ Page github de mon projet d'IPO (Trévis Morvany)
 
 ## Bugs / problèmes
 ### mineurs
-- La grenouille peut toujours bouger après l'apparition de l'écran de fin (<a href=https://github.com/tretre91/ProjetIPO/issues/1>issue #1</a>)
+- <s>La grenouille peut toujours bouger après l'apparition de l'écran de fin (<a href=https://github.com/tretre91/ProjetIPO/issues/1>issue #1</a>)</s>
 ### majeurs
