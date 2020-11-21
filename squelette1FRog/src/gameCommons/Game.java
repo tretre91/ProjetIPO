@@ -5,6 +5,7 @@ import java.util.Random;
 
 import graphicalElements.Element;
 import graphicalElements.IFroggerGraphics;
+import util.Direction;
 
 public class Game {
 
@@ -15,6 +16,7 @@ public class Game {
 	public final int height;
 	public final int minSpeedInTimerLoops;
 	public final double defaultDensity;
+	private boolean isOver = false;
 
 	// Lien aux objets utilis�s
 	private IEnvironment environment;
@@ -77,10 +79,11 @@ public class Game {
 	 */
 	public boolean testLose() {
 		if (!environment.isSafe(frog.getPosition())) {
-			graphic.endGameScreen("YOU DIED");
-			return true;
+			if (frog.getScore() == -1) graphic.endGameScreen("YOU DIED");
+			else graphic.endGameScreen("YOU DIED, score : " + frog.getScore());
+			isOver = true;
 		}
-		return false;
+		return isOver;
 	}
 
 	/**
@@ -92,9 +95,17 @@ public class Game {
 	public boolean testWin() {
 		if (environment.isWinningPosition(frog.getPosition())) {
 			graphic.endGameScreen("Vous avez traversé la rue!");
-			return true;
+			isOver = true;
 		}
-		return false;
+		return isOver;
+	}
+
+	/**
+	 * Indique si la partie est terminée
+	 * @return true si la partie est terminée (victoire ou défaite)
+	 */
+	public boolean isOver(){
+		return isOver;
 	}
 
 	/**
@@ -105,8 +116,17 @@ public class Game {
 		graphic.clear();
 		environment.update();
 		this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
-		testLose();
-		testWin();
+		if(!isOver) {
+			testLose();
+			testWin();
+		}
+	}
+
+
+	/************ Méthodes nécessaires à la version infinie du jeu ************/
+
+	public void moveLanes(Direction d){
+		this.environment.move(d);
 	}
 
 }

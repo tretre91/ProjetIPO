@@ -7,7 +7,7 @@ import gameCommons.Game;
 
 public class Lane {
     private Game game;
-    private final int yCoord;
+    private int yCoord;
     private final int speed;
     private int countdown;
     private final boolean leftToRight;
@@ -85,6 +85,11 @@ public class Lane {
         return true;
     }
 
+    public void setOrd(int ord){
+        yCoord += ord;
+        for (Car c: cars) c.setOrd(yCoord);
+
+    }
 
     /*
      * Fourni : mayAddCar(), getFirstCase() et getBeforeFirstCase()

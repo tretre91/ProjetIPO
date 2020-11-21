@@ -7,15 +7,13 @@ import util.Direction;
 
 public class Frog implements IFrog {
 	
-	private Game game;
-	private boolean cantMove;
-	private int x;
-	private int y;
-	private Direction direction;
+	protected Game game;
+	protected int x;
+	protected int y;
+	protected Direction direction;
 
 	public Frog(Game game){
 		this.game = game;
-		this.cantMove = false;
 		this.x = game.width / 2;
 		this.y = 0;
 		this.direction = Direction.up;
@@ -29,8 +27,12 @@ public class Frog implements IFrog {
 		return direction;
 	}
 
+	public int getScore() {
+		return -1;
+	}
+
 	public void move(Direction key){
-		if(cantMove) return;
+		if(game.isOver()) return;
 
 		switch (key) {
 			case up -> {
@@ -48,8 +50,8 @@ public class Frog implements IFrog {
 		}
 		this.direction = key;
 
-		if (game.testLose()) cantMove = true;
-		else if(game.testWin()) cantMove = true;
+		game.testLose();
+		game.testWin();
 	}
 
 

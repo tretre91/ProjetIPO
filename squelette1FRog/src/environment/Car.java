@@ -91,4 +91,11 @@ public class Car {
         }
     }
 
+    /**
+     * Change l'ordonnée d'une voiture
+     * @param ord La nouvelle ordonnée
+     */
+    public void setOrd(int ord){
+        leftPosition = new Case(leftPosition.absc, ord);
+    }
 }
