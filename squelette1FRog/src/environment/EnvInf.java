@@ -58,6 +58,14 @@ public class EnvInf implements IEnvironment {
         if(d == Direction.up) {
             frogHeight++;
             for (Lane l: lanes) l.setOrd(-1);
+            while (frogHeight > lanes.size() - game.height) {
+                if(nbOfSameWayLanes == 0) {
+                    genNbOfSameWayLanes();
+                    leftToRight = !leftToRight;
+                }
+                lanes.add(new Lane(game, lanes.get(lanes.size() - 1).getOrd() + 1, leftToRight));
+                nbOfSameWayLanes--;
+            }
         } else if (d == Direction.down && frogHeight > 2) {
             frogHeight--;
             for (Lane l: lanes) l.setOrd(1);

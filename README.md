@@ -9,3 +9,7 @@ Page github de mon projet d'IPO (Trévis Morvany)
 ### mineurs
 - <s>La grenouille peut toujours bouger après l'apparition de l'écran de fin (<a href=https://github.com/tretre91/ProjetIPO/issues/1>issue #1</a>)</s>
 ### majeurs
+
+### problèmes
+- La première version du jeu infini utilise trop de mémoire (toutes les voies qui ont été crées sont gardées en mémoire, donc
+ la taille de l'`ArrayList<Lane>` qui contient nos voies augmente indéfiniment)

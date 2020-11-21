@@ -28,7 +28,7 @@ public class Lane {
         this.leftToRight = leftToRight;
         this.speed = game.randomGen.nextInt(7) + game.minSpeedInTimerLoops;
         this.countdown = speed;
-        this.density = (game.randomGen.nextInt(35) + 10) / 100.0f;
+        this.density = (game.randomGen.nextInt(25) + 10) / 100.0f;
 
         initialize();
     }
@@ -88,7 +88,10 @@ public class Lane {
     public void setOrd(int ord){
         yCoord += ord;
         for (Car c: cars) c.setOrd(yCoord);
+    }
 
+    public int getOrd() {
+        return yCoord;
     }
 
     /*

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import util.Case;
 import gameCommons.Game;
 import gameCommons.IEnvironment;
+import util.Direction;
 
 public class Environment implements IEnvironment {
 
@@ -52,4 +53,8 @@ public class Environment implements IEnvironment {
         for (Lane l : lanes) l.update();
     }
 
+    @Override
+    public void move(Direction d) {
+        // retourne rien, cette méthode est inutile pour la version statique du jeu
+    }
 }
