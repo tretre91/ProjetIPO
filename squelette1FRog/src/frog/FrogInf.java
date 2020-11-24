@@ -10,7 +10,7 @@ public class FrogInf extends Frog { // implements IFrog (from Frog)
 
     public FrogInf(Game game) {
         super(game);
-        this.y = 2;
+        this.y = 2; // L'ordonnée de la grenouille par rapport à la fenêtre reste constante, ce sont les voies qui se déplacent
         this.score = 0;
         this.maxScore = 0;
     }
@@ -29,8 +29,10 @@ public class FrogInf extends Frog { // implements IFrog (from Frog)
                 game.moveLanes(Direction.up);
                 break;
             case down:
-                score--;
-                game.moveLanes(Direction.down);
+                if(score > 0) {
+                    score--;
+                    game.moveLanes(Direction.down);
+                }
                 break;
             case left:
                 if (x > 0) x--;

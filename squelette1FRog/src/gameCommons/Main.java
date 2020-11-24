@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 import environment.EnvInf;
+import environment.EnvInfOpt;
 import environment.Environment;
 import frog.Frog;
 import frog.FrogInf;
