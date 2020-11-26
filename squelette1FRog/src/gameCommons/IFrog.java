@@ -10,6 +10,18 @@ public interface IFrog {
 	 * @return
 	 */
 	public Case getPosition();
+
+	/**
+	 * Donne la position de la grenouille par rapport à la zone visible
+	 * @return
+	 */
+	public Case getRelativePosition();
+
+	/**
+	 * Donne la hauteur initiale de la grenouille
+	 * @return
+	 */
+	public int getInitialHeight();
 	
 	/**
 	 * Donne la direction de la grenouille, c'est � dire de son dernier mouvement 

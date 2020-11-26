@@ -8,19 +8,27 @@ import util.Direction;
 public class Frog implements IFrog {
 	
 	protected Game game;
-	protected int x;
-	protected int y;
+	protected Case position;
+	protected int initialHeight;
 	protected Direction direction;
 
 	public Frog(Game game){
 		this.game = game;
-		this.x = game.width / 2;
-		this.y = 0;
+		this.initialHeight = 0;
+		this.position = new Case(game.width / 2, initialHeight);
 		this.direction = Direction.up;
 	}
 
 	public Case getPosition(){
-		return new Case(x, y);
+		return position;
+	}
+
+	public Case getRelativePosition() {
+		return position;
+	}
+
+	public int getInitialHeight() {
+		return initialHeight;
 	}
 
 	public Direction getDirection() {
@@ -35,18 +43,22 @@ public class Frog implements IFrog {
 		if(game.isOver()) return;
 
 		switch (key) {
-			case up -> {
-				if (y < game.height) y++;
-			}
-			case down -> {
-				if(y > 0) y--;
-			}
-			case left -> {
-				if(x > 0) x--;
-			}
-			case right -> {
-				if(x < game.width - 1) x++;
-			}
+			case up:
+				if (position.ord < game.height)
+					position = new Case(position.absc, position.ord + 1);
+				break;
+			case down:
+				if (position.ord > initialHeight)
+					position = new Case(position.absc, position.ord - 1);
+				break;
+			case left:
+				if (position.absc > 0)
+					position = new Case(position.absc - 1, position.ord);
+				break;
+			case right:
+				if (position.absc < game.width - 1)
+					position = new Case(position.absc + 1, position.ord);
+				break;
 		}
 		this.direction = key;
 

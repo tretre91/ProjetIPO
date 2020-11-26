@@ -22,7 +22,7 @@ public class Environment implements IEnvironment {
         this.lanes = new ArrayList<>();
         boolean leftToRight = false;
 
-        int counter = 1;
+        int counter = game.getFrogInitialHeight() + 1;
         while(counter < game.height-1){
             double proba = game.randomGen.nextDouble();
             int nbOfLanes;
@@ -41,8 +41,8 @@ public class Environment implements IEnvironment {
 
     public boolean isSafe(Case c) {
         // on considere les cases hors de la grille comme safe (la grenouille ne pourra dans tous les cas pas s'y déplacer
-        if (c.ord < 1 || c.ord >= game.height - 1 || c.absc < 0 || c.absc >= game.width) return true;
-        else return lanes.get(c.ord - 1).isSafe(c);
+        if (c.ord <= game.getFrogInitialHeight() || c.ord >= game.height - 1 || c.absc < 0 || c.absc >= game.width) return true;
+        else return lanes.get(c.ord - (game.getFrogInitialHeight() + 1)).isSafe(c);
     }
 
     public boolean isWinningPosition(Case c) {
