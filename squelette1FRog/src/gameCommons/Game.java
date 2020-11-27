@@ -2,6 +2,7 @@ package gameCommons;
 
 import java.awt.Color;
 import java.util.Random;
+import java.lang.System;
 
 import graphicalElements.Element;
 import graphicalElements.IFroggerGraphics;
@@ -16,7 +17,9 @@ public class Game {
     public final int height;
     public final int minSpeedInTimerLoops;
     public final double defaultDensity;
-    private boolean isOver = false;
+    private boolean isOver;
+    public long playTime;
+    public boolean started;
 
     // Lien aux objets utilis�s
     private IEnvironment environment;
@@ -37,6 +40,8 @@ public class Game {
         this.height = height;
         this.minSpeedInTimerLoops = minSpeedInTimerLoop;
         this.defaultDensity = defaultDensity;
+        this.isOver = false;
+        this.started = false;
     }
 
     /**
@@ -72,8 +77,9 @@ public class Game {
      */
     public boolean testLose() {
         if (!environment.isSafe(frog.getPosition())) {
-            if (frog.getScore() == -1) graphic.endGameScreen("YOU DIED");
-            else graphic.endGameScreen("YOU DIED, score : " + frog.getScore());
+            String time = "temps: " + ((System.nanoTime() - playTime) / (long)1e9) + "s";
+            if (frog.getScore() == -1) graphic.endGameScreen("YOU DIED, "+ time);
+            else graphic.endGameScreen("YOU DIED, score: " + frog.getScore() + ", " + time);
             isOver = true;
         }
         return isOver;
@@ -87,7 +93,7 @@ public class Game {
      */
     public boolean testWin() {
         if (environment.isWinningPosition(frog.getPosition())) {
-            graphic.endGameScreen("Vous avez traversé la rue!");
+            graphic.endGameScreen("Vous avez traversé la rue en " + ((System.nanoTime() - playTime) / (long)1e9) + "s");
             isOver = true;
         }
         return isOver;
@@ -111,6 +117,10 @@ public class Game {
         environment.update();
         this.graphic.add(new Element(frog.getRelativePosition(), Color.GREEN));
         if (!isOver) {
+            if(!started) {
+                this.playTime = System.nanoTime();
+                started = true;
+            }
             testLose();
             testWin();
         }
