@@ -8,7 +8,7 @@ Page github de mon projet d'IPO (Trévis Morvany)
 - <a href=https://github.com/tretre91/ProjetIPO/tree/eb1c93b18eb235e8bee3344f58c90eae5a79cd33> A la fin de la partie 3 </a>
 - Partie 4
   - [X] timer (<a href=https://github.com/tretre91/ProjetIPO/blob/c47aae9ccd6374293faccec56ffd404e27a7fb54/squelette1FRog/src/gameCommons/Game.java>lien</a>)
-  - [ ] cases spéciales
+  - [X] cases spéciales (piège, glace, mur et bonus, <a href=https://github.com/tretre91/ProjetIPO/tree/b70916ff0d620f2181d1fe2d90a95bece126f586/squelette1FRog/src>lien</a>)
   - [ ] lignes d'eau
 
 ## Bugs / problèmes
