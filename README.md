@@ -6,6 +6,10 @@ Page github de mon projet d'IPO (Trévis Morvany)
 - <a href=https://github.com/tretre91/ProjetIPO/tree/cb6ad9f6de85df69224d2b6c16d938c1745e44b9> A la fin de la partie 2 </a>
 - <a href=https://github.com/tretre91/ProjetIPO/tree/1d119817293dda6547324905bf66d0558cebc770> Première version fonctionnelle de la Partie 3 </a>
 - <a href=https://github.com/tretre91/ProjetIPO/tree/eb1c93b18eb235e8bee3344f58c90eae5a79cd33> A la fin de la partie 3 </a>
+- Partie 4
+  - [X] timer (<a href=https://github.com/tretre91/ProjetIPO/blob/c47aae9ccd6374293faccec56ffd404e27a7fb54/squelette1FRog/src/gameCommons/Game.java>lien</a>)
+  - [ ] cases spéciales
+  - [ ] lignes d'eau
 
 ## Bugs / problèmes
 ### mineurs
