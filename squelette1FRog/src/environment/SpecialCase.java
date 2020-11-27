@@ -3,10 +3,16 @@ package environment;
 import java.awt.*;
 
 public class SpecialCase {
-    private int absc;
+    private final int absc;
     private final CaseType type;
     private Color color;
 
+    /**
+     * Crée une case spéciale
+     * @param type Le type (effet) que possède cette case
+     * @param absc L'abscisse de la case (l'ordonnée n'est pas nécessaire car les cases
+     *             spéciales sont associées à une voie)
+     */
     public SpecialCase(CaseType type, int absc) {
         this.absc = absc;
         this.type = type;
@@ -18,14 +24,26 @@ public class SpecialCase {
         }
     }
 
+    /**
+     * Indique le type d'effet de cette case
+     * @return
+     */
     public CaseType getType() {
         return type;
     }
 
+    /**
+     * Renvoie la couleur associée à cette case
+     * @return
+     */
     public Color getColor() {
         return color;
     }
 
+    /**
+     * renvoie l'abscisse de cette case
+     * @return
+     */
     public int getAbsc() {
         return absc;
     }

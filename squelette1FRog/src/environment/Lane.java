@@ -90,7 +90,7 @@ public class Lane {
      * Indique si une case de la voie est sans danger (càd qu'elle ne contient aucun obstacle)
      *
      * @param c La case à tester (elle est supposée de même ordonnée que la voie)
-     * @return true si la case contient un obstacle, false sinon
+     * @return Un BitSet correspondant à l'état de la case (pas safe, piège, glace, mur et bonus)
      */
     public BitSet isSafe(Case c) {
         BitSet res = new BitSet(5);
@@ -105,19 +105,13 @@ public class Lane {
         for (SpecialCase s: specialCases) {
             if (s.getAbsc() == c.absc) {
                 switch (s.getType()) {
-                    case trap:
-                        res.set(1);
-                        break;
-                    case ice:
-                        res.set(2);
-                        break;
-                    case wall:
-                        res.set(3);
-                        break;
-                    case bonus:
+                    case trap -> res.set(1);
+                    case ice -> res.set(2);
+                    case wall -> res.set(3);
+                    case bonus -> {
                         res.set(4);
                         toRemove = s;
-                        break;
+                    }
                 }
                 break;
             }
@@ -127,11 +121,19 @@ public class Lane {
         return res;
     }
 
-    public void setOrd(int ord){
+    /**
+     * Ajoute une certaine valuer à l'ordonnée de la voie
+     * @param ord La valeur à ajouter (ou à retirer si elle est négative)
+     */
+    public void addOrd(int ord){
         yCoord += ord;
         for (Car c: cars) c.setOrd(yCoord);
     }
 
+    /**
+     * Renvoie l'ordonnée (relative à la fenêtre) de cette voie
+     * @return
+     */
     public int getOrd() {
         return yCoord;
     }

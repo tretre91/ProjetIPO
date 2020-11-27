@@ -59,13 +59,13 @@ public class EnvInf implements IEnvironment {
     public void move(Direction d) {
         if(d == Direction.up) {
             frogHeight++;
-            for (Lane l: lanes) l.setOrd(-1);
+            for (Lane l: lanes) l.addOrd(-1);
             while (frogHeight > lanes.size() - game.height) {
                pushBackLanes();
             }
         } else if (d == Direction.down && frogHeight > game.getFrogInitialHeight()) {
             frogHeight--;
-            for (Lane l: lanes) l.setOrd(1);
+            for (Lane l: lanes) l.addOrd(1);
         }
     }
 }

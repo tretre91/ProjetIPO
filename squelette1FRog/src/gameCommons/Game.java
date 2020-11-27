@@ -13,7 +13,7 @@ public class Game {
 
     public final Random randomGen = new Random();
 
-    // Caracteristique de la partie
+    // Caractéristique de la partie
     public final int width;
     public final int height;
     public final int minSpeedInTimerLoops;
@@ -23,7 +23,7 @@ public class Game {
     private boolean started;
     private int bonusScore;
 
-    // Lien aux objets utilis�s
+    // Lien aux objets utilises
     private IEnvironment environment;
     private IFrog frog;
     private IFroggerGraphics graphic;
@@ -32,8 +32,8 @@ public class Game {
      * @param graphic             l'interface graphique
      * @param width               largeur en cases
      * @param height              hauteur en cases
-     * @param minSpeedInTimerLoop Vitesse minimale, en nombre de tour de timer avant d�placement
-     * @param defaultDensity      densite de voiture utilisee par defaut pour les routes
+     * @param minSpeedInTimerLoop Vitesse minimale, en nombre de tour de timer avant déplacement
+     * @param defaultDensity      densité de voiture utilisée par défaut pour les routes
      */
     public Game(IFroggerGraphics graphic, int width, int height, int minSpeedInTimerLoop, double defaultDensity) {
         super();
@@ -48,7 +48,7 @@ public class Game {
     }
 
     /**
-     * Lie l'objet frog � la partie
+     * Lie l'objet frog à la partie
      *
      * @param frog
      */
@@ -57,7 +57,7 @@ public class Game {
     }
 
     /**
-     * Lie l'objet environment a la partie
+     * Lie l'objet environment à la partie
      *
      * @param environment
      */
@@ -73,24 +73,24 @@ public class Game {
     }
 
     /**
-     * Teste si la partie est perdue et lance un �cran de fin appropri� si tel
-     * est le cas
+     * Teste si la partie est perdue et lance un écran de fin approprié si tel
+     * est le cas, s'occupe également de l'interaction avec les cases spéciales
      *
      * @return true si le partie est perdue
      */
     public boolean testLose() {
         BitSet caseStatus = environment.isSafe(frog.getPosition());
         if (caseStatus.get(0) || caseStatus.get(1)) {
-            String time = "temps: " + ((System.nanoTime() - playTime) / (long)1e9) + "s";
-            if (frog.getScore() == -1) graphic.endGameScreen("YOU DIED, "+ time);
+            String time = "temps: " + ((System.nanoTime() - playTime) / (long) 1e9) + "s";
+            if (frog.getScore() == -1) graphic.endGameScreen("YOU DIED, " + time);
             else graphic.endGameScreen("YOU DIED, score: " + frog.getScore() + "+" + bonusScore + ", " + time);
             isOver = true;
-            return false;
-        } else if (caseStatus.cardinality() > 0){
-            switch (caseStatus.nextSetBit(2)){
+            return true;
+        } else if (caseStatus.cardinality() > 0) {
+            switch (caseStatus.nextSetBit(2)) {
                 case 2:
-                    if(!((frog.getDirection() == Direction.left && frog.getPosition().absc == 0)
-                      || (frog.getDirection() == Direction.right && frog.getPosition().absc == width - 1))) {
+                    if (!((frog.getDirection() == Direction.left && frog.getPosition().absc == 0)
+                            || (frog.getDirection() == Direction.right && frog.getPosition().absc == width - 1))) {
                         frog.move(frog.getDirection());
                     }
                     break;
@@ -105,23 +105,26 @@ public class Game {
                 case 4:
                     bonusScore++;
                     break;
+                default:
+                    break;
             }
         }
-        return isOver;
+        return false;
     }
 
     /**
-     * Teste si la partie est gagnee et lance un �cran de fin appropri� si tel
+     * Teste si la partie est gagnée et lance un écran de fin approprié si tel
      * est le cas
      *
-     * @return true si la partie est gagn�e
+     * @return true si la partie est gagnée
      */
     public boolean testWin() {
         if (environment.isWinningPosition(frog.getPosition())) {
-            graphic.endGameScreen("Vous avez traversé la rue en " + ((System.nanoTime() - playTime) / (long)1e9) + "s");
+            graphic.endGameScreen("Vous avez traversé la rue en " + ((System.nanoTime() - playTime) / (long) 1e9) + "s");
             isOver = true;
+            return true;
         }
-        return isOver;
+        return false;
     }
 
     /**
@@ -134,7 +137,7 @@ public class Game {
     }
 
     /**
-     * Actualise l'environnement, affiche la grenouille et verifie la fin de
+     * Actualise l'environnement, affiche la grenouille et vérifie la fin de
      * partie.
      */
     public void update() {
@@ -142,7 +145,7 @@ public class Game {
         environment.update();
         this.graphic.add(new Element(frog.getRelativePosition(), Color.GREEN));
         if (!isOver) {
-            if(!started) {
+            if (!started) {
                 this.playTime = System.nanoTime();
                 started = true;
             }
@@ -152,12 +155,22 @@ public class Game {
     }
 
 
-    /************ Méthodes nécessaires à la version infinie du jeu ************/
+    /* *********** Méthodes nécessaires à la version infinie du jeu *********** */
 
+    /**
+     * Déplace toutes les voies de l'environnement
+     *
+     * @param d La direction du déplacement (left et right n'ont pas d'effet)
+     */
     public void moveLanes(Direction d) {
         this.environment.move(d);
     }
 
+    /**
+     * Indique l'ordonnée de la case de depart de la grenouille
+     *
+     * @return l'ordonnée initiale de la grenouille
+     */
     public int getFrogInitialHeight() {
         return frog.getInitialHeight();
     }

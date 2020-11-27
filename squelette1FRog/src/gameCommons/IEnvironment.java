@@ -8,25 +8,25 @@ import java.util.BitSet;
 public interface IEnvironment {
 
 	/**
-	 * Teste si une case est sure, c'est � dire que la grenouille peut s'y poser
+	 * Teste si une case est sure, c'est à dire que la grenouille peut s'y poser
 	 * sans mourir
 	 * 
-	 * @param c
-	 *            la case � tester
-	 * @return vrai s'il n'y a pas danger
+	 * @param c La case à tester
+	 * @return Un BitSet contenant l'état de la case, ses bits correspondent dans
+	 * l'ordre aux états suivants : pas safe, piege, glace, mur, bonus
 	 */
 	public BitSet isSafe(Case c);
 
 	/**
-	 * Teste si la case est une case d'arrivee
+	 * Teste si la case est une case d'arrivée
 	 * 
-	 * @param c
+	 * @param c La case à tester
 	 * @return vrai si la case est une case de victoire
 	 */
 	public boolean isWinningPosition(Case c);
 
 	/**
-	 * Effectue une �tape d'actualisation de l'environnement
+	 * Effectue une étape d'actualisation de l'environnement
 	 */
 	public void update();
 

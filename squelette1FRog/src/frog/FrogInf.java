@@ -26,7 +26,7 @@ public class FrogInf extends Frog { // implements IFrog (from Frog)
 
     @Override
     public void move(Direction key) {
-        if(game.isOver()) return;
+        if (game.isOver()) return;
 
         switch (key) {
             case up:

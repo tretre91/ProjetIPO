@@ -6,65 +6,65 @@ import util.Case;
 import util.Direction;
 
 public class Frog implements IFrog {
-	
-	protected Game game;
-	protected Case position;
-	protected int initialHeight;
-	protected Direction direction;
 
-	public Frog(Game game){
-		this.game = game;
-		this.initialHeight = 0;
-		this.position = new Case(game.width / 2, initialHeight);
-		this.direction = Direction.up;
-	}
+    protected Game game;
+    protected Case position;
+    protected int initialHeight;
+    protected Direction direction;
 
-	public Case getPosition(){
-		return position;
-	}
+    public Frog(Game game) {
+        this.game = game;
+        this.initialHeight = 0;
+        this.position = new Case(game.width / 2, initialHeight);
+        this.direction = Direction.up;
+    }
 
-	public Case getRelativePosition() {
-		return position;
-	}
+    public Case getPosition() {
+        return position;
+    }
 
-	public int getInitialHeight() {
-		return initialHeight;
-	}
+    public Case getRelativePosition() {
+        return position;
+    }
 
-	public Direction getDirection() {
-		return direction;
-	}
+    public int getInitialHeight() {
+        return initialHeight;
+    }
 
-	public int getScore() {
-		return -1;
-	}
+    public Direction getDirection() {
+        return direction;
+    }
 
-	public void move(Direction key){
-		if(game.isOver()) return;
+    public int getScore() {
+        return -1;
+    }
 
-		switch (key) {
-			case up:
-				if (position.ord < game.height)
-					position = new Case(position.absc, position.ord + 1);
-				break;
-			case down:
-				if (position.ord > initialHeight)
-					position = new Case(position.absc, position.ord - 1);
-				break;
-			case left:
-				if (position.absc > 0)
-					position = new Case(position.absc - 1, position.ord);
-				break;
-			case right:
-				if (position.absc < game.width - 1)
-					position = new Case(position.absc + 1, position.ord);
-				break;
-		}
-		this.direction = key;
+    public void move(Direction key) {
+        if (game.isOver()) return;
 
-		game.testLose();
-		game.testWin();
-	}
+        switch (key) {
+            case up:
+                if (position.ord < game.height)
+                    position = new Case(position.absc, position.ord + 1);
+                break;
+            case down:
+                if (position.ord > initialHeight)
+                    position = new Case(position.absc, position.ord - 1);
+                break;
+            case left:
+                if (position.absc > 0)
+                    position = new Case(position.absc - 1, position.ord);
+                break;
+            case right:
+                if (position.absc < game.width - 1)
+                    position = new Case(position.absc + 1, position.ord);
+                break;
+        }
+        this.direction = key;
+
+        game.testLose();
+        game.testWin();
+    }
 
 
 }
