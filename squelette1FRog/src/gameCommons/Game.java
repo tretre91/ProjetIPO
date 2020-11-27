@@ -1,6 +1,7 @@
 package gameCommons;
 
 import java.awt.Color;
+import java.util.BitSet;
 import java.util.Random;
 import java.lang.System;
 
@@ -18,8 +19,9 @@ public class Game {
     public final int minSpeedInTimerLoops;
     public final double defaultDensity;
     private boolean isOver;
-    public long playTime;
-    public boolean started;
+    private long playTime;
+    private boolean started;
+    private int bonusScore;
 
     // Lien aux objets utilis�s
     private IEnvironment environment;
@@ -42,6 +44,7 @@ public class Game {
         this.defaultDensity = defaultDensity;
         this.isOver = false;
         this.started = false;
+        this.bonusScore = 0;
     }
 
     /**
@@ -76,11 +79,33 @@ public class Game {
      * @return true si le partie est perdue
      */
     public boolean testLose() {
-        if (!environment.isSafe(frog.getPosition())) {
+        BitSet caseStatus = environment.isSafe(frog.getPosition());
+        if (caseStatus.get(0) || caseStatus.get(1)) {
             String time = "temps: " + ((System.nanoTime() - playTime) / (long)1e9) + "s";
             if (frog.getScore() == -1) graphic.endGameScreen("YOU DIED, "+ time);
-            else graphic.endGameScreen("YOU DIED, score: " + frog.getScore() + ", " + time);
+            else graphic.endGameScreen("YOU DIED, score: " + frog.getScore() + "+" + bonusScore + ", " + time);
             isOver = true;
+            return false;
+        } else if (caseStatus.cardinality() > 0){
+            switch (caseStatus.nextSetBit(2)){
+                case 2:
+                    if(!((frog.getDirection() == Direction.left && frog.getPosition().absc == 0)
+                      || (frog.getDirection() == Direction.right && frog.getPosition().absc == width - 1))) {
+                        frog.move(frog.getDirection());
+                    }
+                    break;
+                case 3:
+                    switch (frog.getDirection()) {
+                        case up -> frog.move(Direction.down);
+                        case down -> frog.move(Direction.up);
+                        case left -> frog.move(Direction.right);
+                        case right -> frog.move(Direction.left);
+                    }
+                    break;
+                case 4:
+                    bonusScore++;
+                    break;
+            }
         }
         return isOver;
     }

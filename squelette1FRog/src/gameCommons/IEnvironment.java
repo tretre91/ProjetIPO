@@ -3,6 +3,8 @@ package gameCommons;
 import util.Case;
 import util.Direction;
 
+import java.util.BitSet;
+
 public interface IEnvironment {
 
 	/**
@@ -13,7 +15,7 @@ public interface IEnvironment {
 	 *            la case � tester
 	 * @return vrai s'il n'y a pas danger
 	 */
-	public boolean isSafe(Case c);
+	public BitSet isSafe(Case c);
 
 	/**
 	 * Teste si la case est une case d'arrivee

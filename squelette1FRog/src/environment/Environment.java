@@ -1,6 +1,7 @@
 package environment;
 
 import java.util.ArrayList;
+import java.util.BitSet;
 
 import util.Case;
 import gameCommons.Game;
@@ -39,9 +40,9 @@ public class Environment implements IEnvironment {
         }
     }
 
-    public boolean isSafe(Case c) {
+    public BitSet isSafe(Case c) {
         // on considere les cases hors de la grille comme safe (la grenouille ne pourra dans tous les cas pas s'y déplacer
-        if (c.ord <= game.getFrogInitialHeight() || c.ord >= game.height - 1 || c.absc < 0 || c.absc >= game.width) return true;
+        if (c.ord <= game.getFrogInitialHeight() || c.ord >= game.height - 1 || c.absc < 0 || c.absc >= game.width) return new BitSet(5);
         else return lanes.get(c.ord - (game.getFrogInitialHeight() + 1)).isSafe(c);
     }
 
