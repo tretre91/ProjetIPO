@@ -5,9 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
-import environment.EnvInf;
-import environment.Environment;
-import frog.Frog;
+import environment.env.EnvInf;
 import frog.FrogInf;
 import graphicalElements.FroggerGraphic;
 import graphicalElements.IFroggerGraphics;
@@ -27,7 +25,7 @@ public class Main {
 		IFroggerGraphics graphic = new FroggerGraphic(width, height);
 		//Création de la partie
 		Game game = new Game(graphic, width, height, minSpeedInTimerLoops, defaultDensity);
-		//Création et liason de la grenouille
+		//Création et liaison de la grenouille
 		IFrog frog = new FrogInf(game);
 		game.setFrog(frog);
 		graphic.setFrog(frog);
@@ -35,7 +33,7 @@ public class Main {
 		IEnvironment env = new EnvInf(game);
 		game.setEnvironment(env);
 				
-		//Boucle principale : l'environnement s'acturalise tous les tempo milisecondes
+		//Boucle principale : l'environnement s'actualise tous les tempo millisecondes
 		Timer timer = new Timer(tempo, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

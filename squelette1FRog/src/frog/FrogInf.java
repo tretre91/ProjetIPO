@@ -41,7 +41,7 @@ public class FrogInf extends Frog { // implements IFrog (from Frog)
                     position = new Case(position.absc - 1, position.ord);
                 break;
             case right:
-                if (position.absc < game.width)
+                if (position.absc < game.width - 1)
                     position = new Case(position.absc + 1, position.ord);
                 break;
         }

@@ -1,5 +1,6 @@
-package environment;
+package environment.env;
 
+import environment.lanes.*;
 import gameCommons.Game;
 import gameCommons.IEnvironment;
 import util.Case;
@@ -20,7 +21,7 @@ public class EnvInf implements IEnvironment {
         this.leftToRight = false;
         this.frogHeight = game.getFrogInitialHeight();
 
-        lanes.add(new Lane(game, game.getFrogInitialHeight(), leftToRight));
+        lanes.add(new CarLane(game, game.getFrogInitialHeight(), leftToRight));
         while (lanes.size() < 2 * game.height) {
             pushBackLanes();
         }
@@ -38,12 +39,12 @@ public class EnvInf implements IEnvironment {
         else nbOfLanes = 3;
 
         int y = lanes.get(lanes.size() - 1).getOrd() + 1;
-        for (int i = 0; i < nbOfLanes; i++) lanes.add(new Lane(game, y + i, leftToRight));
+        for (int i = 0; i < nbOfLanes; i++) lanes.add(new WaterLane(game, y + i, leftToRight));
         leftToRight = !leftToRight;
     }
 
     public BitSet isSafe(Case c) {
-        // on considere les cases hors de la grille comme safe (la grenouille ne pourra dans tous les cas pas s'y déplacer
+        // on considère les cases hors de la grille comme safe (la grenouille ne pourra dans tous les cas pas s'y déplacer
         if (c.ord <= game.getFrogInitialHeight() || c.absc < 0 || c.absc >= game.width) return new BitSet(5);
         else return lanes.get(c.ord - (game.getFrogInitialHeight() + 1)).isSafe(c);
     }
