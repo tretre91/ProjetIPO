@@ -14,7 +14,8 @@ Page github de mon projet d'IPO (Trévis Morvany)
 ## Bugs / problèmes
 ### mineurs
 - <s>La grenouille peut toujours bouger après l'apparition de l'écran de fin (<a href=https://github.com/tretre91/ProjetIPO/issues/1>issue #1</a>)</s>
-- Les bonus s'affichent sous les rondins, et les murs sous les voitures (<a href=https://github.com/tretre91/ProjetIPO/issues/3>issue #3</a>)
+- <s>Les bonus s'affichent sous les rondins, et les murs sous les voitures (<a href=https://github.com/tretre91/ProjetIPO/issues/3>issue #3</a>)</s>
+- On perd la partie lorsqu'on essaie d'avancer sur une case *wall* qui contient également une voiture (<a href=https://github.com/tretre91/ProjetIPO/issues/4>issue #4</a>)
 ### majeurs
 - <s>La première version du jeu infini utilise trop de mémoire (toutes les voies qui ont été crées sont gardées en mémoire, donc
  la taille de l'`ArrayList<Lane>` qui contient nos voies augmente indéfiniment) (<a href=https://github.com/tretre91/ProjetIPO/issues/2>issue #2</a>)</s>
