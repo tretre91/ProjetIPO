@@ -84,34 +84,26 @@ public class Game {
      */
     public boolean testLose() {
         BitSet caseStatus = environment.isSafe(frog.getPosition());
-        if (caseStatus.get(0) || caseStatus.get(1)) {
+        if (caseStatus.get(3)) {
+            switch (frog.getDirection()) {
+                case up -> frog.move(Direction.down);
+                case down -> frog.move(Direction.up);
+                case left -> frog.move(Direction.right);
+                case right -> frog.move(Direction.left);
+            }
+        } else if (caseStatus.get(0) || caseStatus.get(1)) {
             String time = "temps: " + ((System.nanoTime() - playTime) / (long) 1e9) + "s";
             if (frog.getScore() == -1) graphic.endGameScreen("YOU DIED, " + time);
             else graphic.endGameScreen("YOU DIED, score: " + frog.getScore() + "+" + bonusScore + ", " + time);
             isOver = true;
             return true;
-        } else if (caseStatus.cardinality() > 0) {
-            switch (caseStatus.nextSetBit(2)) {
-                case 2:
-                    if (!((frog.getDirection() == Direction.left && frog.getPosition().absc == 0)
-                            || (frog.getDirection() == Direction.right && frog.getPosition().absc == width - 1))) {
-                        frog.move(frog.getDirection());
-                    }
-                    break;
-                case 3:
-                    switch (frog.getDirection()) {
-                        case up -> frog.move(Direction.down);
-                        case down -> frog.move(Direction.up);
-                        case left -> frog.move(Direction.right);
-                        case right -> frog.move(Direction.left);
-                    }
-                    break;
-                case 4:
-                    bonusScore++;
-                    break;
-                default:
-                    break;
+        } else if (caseStatus.get(2)) {
+            if (!((frog.getDirection() == Direction.left && frog.getPosition().absc == 0)
+                    || (frog.getDirection() == Direction.right && frog.getPosition().absc == width - 1))) {
+                frog.move(frog.getDirection());
             }
+        } else if (caseStatus.get(4)) {
+            bonusScore++;
         }
         return false;
     }
