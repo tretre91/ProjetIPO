@@ -9,11 +9,12 @@ Page github de mon projet d'IPO (Trévis Morvany)
 - Partie 4
   - [X] timer (<a href=https://github.com/tretre91/ProjetIPO/blob/c47aae9ccd6374293faccec56ffd404e27a7fb54/squelette1FRog/src/gameCommons/Game.java>lien</a>)
   - [X] cases spéciales (piège, glace, mur et bonus, <a href=https://github.com/tretre91/ProjetIPO/tree/b70916ff0d620f2181d1fe2d90a95bece126f586/squelette1FRog/src>lien</a>)
-  - [ ] lignes d'eau
+  - [X] lignes d'eau (<a href=https://github.com/tretre91/ProjetIPO/tree/4e05830409f266b61057a92087e47c28fcc43d6b>lien</a>)
 
 ## Bugs / problèmes
 ### mineurs
 - <s>La grenouille peut toujours bouger après l'apparition de l'écran de fin (<a href=https://github.com/tretre91/ProjetIPO/issues/1>issue #1</a>)</s>
+- Les bonus s'affichent sous les rondins, et les murs sous les voitures (<a href=https://github.com/tretre91/ProjetIPO/issues/3>issue #3</a>)
 ### majeurs
 - <s>La première version du jeu infini utilise trop de mémoire (toutes les voies qui ont été crées sont gardées en mémoire, donc
  la taille de l'`ArrayList<Lane>` qui contient nos voies augmente indéfiniment) (<a href=https://github.com/tretre91/ProjetIPO/issues/2>issue #2</a>)</s>
