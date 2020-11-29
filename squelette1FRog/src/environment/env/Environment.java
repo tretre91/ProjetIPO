@@ -5,6 +5,7 @@ import java.util.BitSet;
 
 import environment.lanes.CarLane;
 import environment.lanes.Lane;
+import environment.lanes.WaterLane;
 import util.Case;
 import gameCommons.Game;
 import gameCommons.IEnvironment;
@@ -33,12 +34,21 @@ public class Environment implements IEnvironment {
             else if(proba < 0.75) nbOfLanes = 2;
             else nbOfLanes = 3;
 
-            for(int i = 0; i < nbOfLanes; i++){
-                lanes.add(new CarLane(game, counter, leftToRight));
-                counter++;
-                if(counter == game.height - 1) break;
+            if(game.randomGen.nextInt(100) < 25) {
+                for(int i = 0; i < nbOfLanes; i++){
+                    lanes.add(new WaterLane(game, counter, leftToRight));
+                    counter++;
+                    leftToRight = !leftToRight;
+                    if(counter == game.height - 1) break;
+                }
+            } else {
+                for (int i = 0; i < nbOfLanes; i++) {
+                    lanes.add(new CarLane(game, counter, leftToRight));
+                    counter++;
+                    if (counter == game.height - 1) break;
+                }
+                leftToRight = !leftToRight;
             }
-            leftToRight = !leftToRight;
         }
     }
 

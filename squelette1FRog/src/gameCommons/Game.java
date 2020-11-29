@@ -56,6 +56,10 @@ public class Game {
         this.frog = frog;
     }
 
+    public IFrog getFrog() {
+        return frog;
+    }
+
     /**
      * Lie l'objet environment à la partie
      *

@@ -6,6 +6,7 @@ import gameCommons.IEnvironment;
 import util.Case;
 import util.Direction;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.BitSet;
 
@@ -15,6 +16,7 @@ public class EnvInf implements IEnvironment {
     private ArrayList<Lane> lanes = new ArrayList<>();
     private int frogHeight;
     private boolean leftToRight;
+    private final Color transitionLaneColor = new Color(68, 101, 1);
 
     public EnvInf(Game game){
         this.game = game;
@@ -37,10 +39,21 @@ public class EnvInf implements IEnvironment {
         if (proba < 0.25) nbOfLanes = 1;
         else if (proba < 0.75) nbOfLanes = 2;
         else nbOfLanes = 3;
-
         int y = lanes.get(lanes.size() - 1).getOrd() + 1;
-        for (int i = 0; i < nbOfLanes; i++) lanes.add(new WaterLane(game, y + i, leftToRight));
-        leftToRight = !leftToRight;
+
+        if (game.randomGen.nextInt(100) < 20) {
+            nbOfLanes++;
+            lanes.add(new Lane(game, y, transitionLaneColor));
+            y++;
+            for (int i = 0; i < nbOfLanes; i++) {
+                lanes.add(new WaterLane(game, y + i, leftToRight));
+                leftToRight = !leftToRight;
+            }
+            lanes.add(new Lane(game, y + nbOfLanes, transitionLaneColor));
+        } else {
+            for (int i = 0; i < nbOfLanes; i++) lanes.add(new CarLane(game, y + i, leftToRight));
+            leftToRight = !leftToRight;
+        }
     }
 
     public BitSet isSafe(Case c) {

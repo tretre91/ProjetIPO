@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
-import environment.env.EnvInf;
-import frog.FrogInf;
+import environment.env.*;
+import frog.*;
 import graphicalElements.FroggerGraphic;
 import graphicalElements.IFroggerGraphics;
 

@@ -1,12 +1,16 @@
 package environment.lanes;
 
+import environment.CaseType;
+import environment.SpecialCase;
 import environment.elements.Log;
 import environment.elements.Obstacle;
 import gameCommons.Game;
 import util.Case;
+import util.Direction;
 
 import java.awt.*;
 import java.util.BitSet;
+import java.util.function.Predicate;
 
 public class WaterLane extends Lane {
 
@@ -17,7 +21,23 @@ public class WaterLane extends Lane {
         this.countdown = speed;
         this.density = (game.randomGen.nextInt(15) + 10) / 100.0f;
 
+        // On retire toutes les cases spéciales à part les bonus
+        specialCases.removeIf(new Predicate<SpecialCase>() {
+            @Override
+            public boolean test(SpecialCase s) {
+                return s.getType() != CaseType.bonus;
+            }
+        });
         initialize();
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        if (ord == game.getFrog().getRelativePosition().ord && countdown == speed) {
+            if (leftToRight) game.getFrog().move(Direction.right);
+            else game.getFrog().move(Direction.left);
+        }
     }
 
     @Override
