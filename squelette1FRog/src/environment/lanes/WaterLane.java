@@ -5,6 +5,7 @@ import environment.SpecialCase;
 import environment.elements.Log;
 import environment.elements.Obstacle;
 import gameCommons.Game;
+import graphicalElements.Element;
 import util.Case;
 import util.Direction;
 
@@ -38,6 +39,8 @@ public class WaterLane extends Lane {
             if (leftToRight) game.getFrog().move(Direction.right);
             else game.getFrog().move(Direction.left);
         }
+
+        for (SpecialCase s: specialCases) game.getGraphic().add(new Element(s.getAbsc(), ord, s.getColor()));
     }
 
     @Override

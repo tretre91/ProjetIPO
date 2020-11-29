@@ -1,8 +1,11 @@
 package environment.lanes;
 
+import environment.CaseType;
+import environment.SpecialCase;
 import environment.elements.Car;
 import environment.elements.Obstacle;
 import gameCommons.Game;
+import graphicalElements.Element;
 import util.Case;
 
 import java.util.BitSet;
@@ -17,6 +20,13 @@ public class CarLane extends Lane {
         this.density = (game.randomGen.nextInt(25) + 10) / 100.0f;
 
         initialize();
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        for (SpecialCase s: specialCases)
+            if (s.getType() == CaseType.wall) game.getGraphic().add(new Element(s.getAbsc(), ord, s.getColor()));
     }
 
     @Override
