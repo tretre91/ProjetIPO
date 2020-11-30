@@ -38,8 +38,18 @@ public class MyFroggerGraphic extends JPanel implements IFroggerGraphics, KeyLis
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         for (Element e : elementsToDisplay) {
-            g.setColor(e.color);
-            g.fillRect(pixelByCase * e.absc, pixelByCase * (height - 1 - e.ord), pixelByCase, pixelByCase - 1);
+            if(e.color == Color.orange) {
+                g.setColor(e.color);
+                g.fillOval(pixelByCase * e.absc, pixelByCase * (height - 1 - e.ord), pixelByCase, pixelByCase - 1);
+            } else {
+                g.setColor(e.color);
+                g.fillRect(pixelByCase * e.absc, pixelByCase * (height - 1 - e.ord), pixelByCase, pixelByCase - 1);
+            }
+        }
+        if (frog.getScore() != -1) {
+            g.setFont(new Font("Verdana", Font.PLAIN, 15));
+            g.setColor(Color.white);
+            g.drawString("Score : " + frog.getScore(), 0, 15);
         }
     }
 
@@ -51,17 +61,10 @@ public class MyFroggerGraphic extends JPanel implements IFroggerGraphics, KeyLis
 
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
-            case KeyEvent.VK_UP:
-                frog.move(Direction.up);
-                break;
-            case KeyEvent.VK_DOWN:
-                frog.move(Direction.down);
-                break;
-            case KeyEvent.VK_LEFT:
-                frog.move(Direction.left);
-                break;
-            case KeyEvent.VK_RIGHT:
-                frog.move(Direction.right);
+            case KeyEvent.VK_UP -> frog.move(Direction.up);
+            case KeyEvent.VK_DOWN -> frog.move(Direction.down);
+            case KeyEvent.VK_LEFT -> frog.move(Direction.left);
+            case KeyEvent.VK_RIGHT -> frog.move(Direction.right);
         }
     }
 
@@ -92,7 +95,6 @@ public class MyFroggerGraphic extends JPanel implements IFroggerGraphics, KeyLis
             startingPos += font.getSize() + 2;
         }
         frame.repaint();
-
     }
 
 }
