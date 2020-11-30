@@ -87,8 +87,8 @@ public class Lane {
 
             if (out != -1) obstacles.remove(out); // si un obstacle est sorti de la zone de jeu, on la retire de 'obstacles'
             countdown = speed;
-            mayAddObstacle();
         }
+        mayAddObstacle();
         for (SpecialCase s : specialCases) game.getGraphic().add(new Element(s.getAbsc(), ord, s.getColor()));
         for (Obstacle o: obstacles) o.display();
     }
@@ -148,7 +148,8 @@ public class Lane {
 
     /**
      * Ajoute un obstacle au début de la voie avec probabilité égale à la densité si la première case
-     * de la voie est vide, cette méthode est redéfinie dans les classes filles
+     * de la voie est vide, cette méthode est redéfinie dans les classes filles (cela permet de créer des
+     * voies vides grâce à la classe Lane)
      */
     protected void mayAddObstacle() { }
 

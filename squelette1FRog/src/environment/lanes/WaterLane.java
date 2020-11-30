@@ -20,7 +20,7 @@ public class WaterLane extends Lane {
         this.leftToRight = leftToRight;
         this.speed = game.randomGen.nextInt(7) + game.minSpeedInTimerLoops;
         this.countdown = speed;
-        this.density = (game.randomGen.nextInt(15) + 10) / 100.0f;
+        this.density = (game.randomGen.nextInt(3) + 2) / 100.0f;
 
         // On retire toutes les cases spéciales à part les bonus
         specialCases.removeIf(new Predicate<SpecialCase>() {

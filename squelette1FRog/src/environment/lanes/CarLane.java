@@ -17,7 +17,7 @@ public class CarLane extends Lane {
         this.leftToRight = leftToRight;
         this.speed = game.randomGen.nextInt(7) + 2;
         this.countdown = speed;
-        this.density = (game.randomGen.nextInt(25) + 10) / 100.0f;
+        this.density = (game.randomGen.nextInt(2) + 3) / 100.0f;
 
         initialize();
     }
