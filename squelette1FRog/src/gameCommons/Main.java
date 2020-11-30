@@ -9,6 +9,7 @@ import environment.env.*;
 import frog.*;
 import graphicalElements.FroggerGraphic;
 import graphicalElements.IFroggerGraphics;
+import graphicalElements.MyFroggerGraphic;
 
 public class Main {
 
@@ -22,7 +23,7 @@ public class Main {
 		double defaultDensity = 0.2;
 		
 		//Création de l'interface graphique
-		IFroggerGraphics graphic = new FroggerGraphic(width, height);
+		IFroggerGraphics graphic = new MyFroggerGraphic(width, height);
 		//Création de la partie
 		Game game = new Game(graphic, width, height, minSpeedInTimerLoops, defaultDensity);
 		//Création et liaison de la grenouille
