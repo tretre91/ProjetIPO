@@ -93,8 +93,8 @@ public class Game {
             }
         } else if (caseStatus.get(0) || caseStatus.get(1)) {
             String time = "temps: " + ((System.nanoTime() - playTime) / (long) 1e9) + "s";
-            if (frog.getScore() == -1) graphic.endGameScreen("YOU DIED, " + time);
-            else graphic.endGameScreen("YOU DIED, score: " + frog.getScore() + "+" + bonusScore + ", " + time);
+            if (frog.getScore() == -1) graphic.endGameScreen("YOU DIED\n" + time);
+            else graphic.endGameScreen("YOU DIED\nscore: " + frog.getScore() + " (+" + bonusScore + ")\n" + time);
             isOver = true;
             return true;
         } else if (caseStatus.get(2)) {
