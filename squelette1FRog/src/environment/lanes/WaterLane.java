@@ -9,14 +9,15 @@ import graphicalElements.Element;
 import util.Case;
 import util.Direction;
 
-import java.awt.*;
 import java.util.BitSet;
 import java.util.function.Predicate;
+
+import static gameCommons.Game.waterColor;
 
 public class WaterLane extends Lane {
 
     public WaterLane(Game game, int ord, boolean leftToRight) {
-        super(game, ord, new Color(27, 176, 217));
+        super(game, ord, waterColor);
         this.leftToRight = leftToRight;
         this.speed = game.randomGen.nextInt(7) + game.minSpeedInTimerLoops;
         this.countdown = speed;

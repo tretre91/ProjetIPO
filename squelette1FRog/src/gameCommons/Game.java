@@ -12,6 +12,8 @@ import util.Direction;
 public class Game {
 
     public final Random randomGen = new Random();
+    public static final Color transitionLaneColor = new Color(68, 101, 1);
+    public static final Color waterColor = new Color(27, 176, 217);
 
     // Caractéristique de la partie
     public final int width;

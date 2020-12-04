@@ -1,5 +1,6 @@
 package graphicalElements;
 
+import gameCommons.Game;
 import gameCommons.IFrog;
 import util.Direction;
 
@@ -38,11 +39,12 @@ public class MyFroggerGraphic extends JPanel implements IFroggerGraphics, KeyLis
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         for (Element e : elementsToDisplay) {
+            g.setColor(e.color);
             if(e.color == Color.orange) {
-                g.setColor(e.color);
                 g.fillOval(pixelByCase * e.absc, pixelByCase * (height - 1 - e.ord), pixelByCase, pixelByCase - 1);
+            } else if (e.color == Game.transitionLaneColor || e.color == Game.waterColor) {
+                g.fillRect(pixelByCase * e.absc, pixelByCase * (height - 1 - e.ord), pixelByCase, pixelByCase);
             } else {
-                g.setColor(e.color);
                 g.fillRect(pixelByCase * e.absc, pixelByCase * (height - 1 - e.ord), pixelByCase, pixelByCase - 1);
             }
         }
