@@ -10,13 +10,15 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.BitSet;
 
+import static gameCommons.Game.transitionLaneColor;
+
 public class EnvInf implements IEnvironment {
 
     private Game game;
     private ArrayList<Lane> lanes = new ArrayList<>();
     private int frogHeight;
     private boolean leftToRight;
-    private final Color transitionLaneColor = new Color(68, 101, 1);
+
 
     public EnvInf(Game game){
         this.game = game;
