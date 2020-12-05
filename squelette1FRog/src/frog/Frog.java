@@ -12,6 +12,11 @@ public class Frog implements IFrog {
     protected int initialHeight;
     protected Direction direction;
 
+    /**
+     * Crée une grenouille qui doit être utilisée avec un environnement classique
+     *
+     * @param game La partie de jeu qui utilisera cette grenouille
+     */
     public Frog(Game game) {
         this.game = game;
         this.initialHeight = 0;

@@ -48,8 +48,8 @@ public class MyFroggerGraphic extends JPanel implements IFroggerGraphics, KeyLis
                 g.fillRect(pixelByCase * e.absc, pixelByCase * (height - 1 - e.ord), pixelByCase, pixelByCase - 1);
             }
         }
-        if (frog.getScore() != -1) {
-            g.setFont(new Font("Verdana", Font.PLAIN, 15));
+        if (frog != null && frog.getScore() != -1) {
+            g.setFont(new Font("Verdana", Font.BOLD, 15));
             g.setColor(Color.white);
             g.drawString("Score : " + frog.getScore(), 0, 15);
         }
@@ -84,7 +84,7 @@ public class MyFroggerGraphic extends JPanel implements IFroggerGraphics, KeyLis
 
     public void endGameScreen(String s) {
         String[] lines = s.split("\n");
-        Font font = new Font("Verdana", 1, 20);
+        Font font = new Font("Verdana", Font.BOLD, 20);
         int startingPos = (lines.length * (font.getSize() + 2)) / -2;
         frame.remove(this);
         for (String str: lines) {

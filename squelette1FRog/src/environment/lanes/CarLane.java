@@ -12,6 +12,13 @@ import java.util.BitSet;
 
 public class CarLane extends Lane {
 
+    /**
+     * Crée une ligne de route avec des voitures comme obstacles
+     *
+     * @param game        La partie de jeu liée à l'environnement de la voie
+     * @param ord         L'ordonnée de la voie
+     * @param leftToRight Le sens de circulation des voitures (true = de gauche à droite)
+     */
     public CarLane(Game game, int ord, boolean leftToRight) {
         super(game, ord);
         this.leftToRight = leftToRight;
@@ -25,14 +32,14 @@ public class CarLane extends Lane {
     @Override
     public void update() {
         super.update();
-        for (SpecialCase s: specialCases)
+        for (SpecialCase s : specialCases)
             if (s.getType() == CaseType.wall) game.getGraphic().add(new Element(s.getAbsc(), ord, s.getColor()));
     }
 
     @Override
     public BitSet isSafe(Case c) {
         BitSet res = super.isSafe(c);
-        for (Obstacle obs: obstacles) {
+        for (Obstacle obs : obstacles) {
             if (obs.overlaps(c)) {
                 res.set(0);
                 break;

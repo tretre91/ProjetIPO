@@ -10,12 +10,18 @@ import util.Case;
 import util.Direction;
 
 import java.util.BitSet;
-import java.util.function.Predicate;
 
 import static gameCommons.Game.waterColor;
 
 public class WaterLane extends Lane {
 
+    /**
+     * Crée une ligne d'eau avec des rondis comme comme obstacles
+     *
+     * @param game        La partie de jeu liée à l'environnement de la voie
+     * @param ord         L'ordonnée de la voie
+     * @param leftToRight Le sens de circulation des rondins (true = de gauche à droite)
+     */
     public WaterLane(Game game, int ord, boolean leftToRight) {
         super(game, ord, waterColor);
         this.leftToRight = leftToRight;
@@ -24,12 +30,7 @@ public class WaterLane extends Lane {
         this.density = (game.randomGen.nextInt(3) + 2) / 100.0f;
 
         // On retire toutes les cases spéciales à part les bonus
-        specialCases.removeIf(new Predicate<SpecialCase>() {
-            @Override
-            public boolean test(SpecialCase s) {
-                return s.getType() != CaseType.bonus;
-            }
-        });
+        specialCases.removeIf(s -> s.getType() != CaseType.bonus);
         initialize();
     }
 
@@ -41,14 +42,14 @@ public class WaterLane extends Lane {
             else game.getFrog().move(Direction.left);
         }
 
-        for (SpecialCase s: specialCases) game.getGraphic().add(new Element(s.getAbsc(), ord, s.getColor()));
+        for (SpecialCase s : specialCases) game.getGraphic().add(new Element(s.getAbsc(), ord, s.getColor()));
     }
 
     @Override
     public BitSet isSafe(Case c) {
         BitSet res = super.isSafe(c);
         res.set(0);
-        for (Obstacle obs: obstacles) {
+        for (Obstacle obs : obstacles) {
             if (obs.overlaps(c)) {
                 res.flip(0);
                 break;

@@ -8,6 +8,11 @@ public class FrogInf extends Frog { // implements IFrog (from Frog)
 
     private int maxScore;
 
+    /**
+     * Crée une grenouille qui doit être utilisée avec un environnement infini
+     *
+     * @param game La partie de jeu qui utilisera cette grenouille
+     */
     public FrogInf(Game game) {
         super(game);
         this.initialHeight = 2; // L'ordonnée de la grenouille par rapport à la fenêtre reste constante, ce sont les voies qui se déplacent
@@ -20,6 +25,7 @@ public class FrogInf extends Frog { // implements IFrog (from Frog)
         return new Case(position.absc, initialHeight);
     }
 
+    @Override
     public int getScore() {
         return maxScore;
     }

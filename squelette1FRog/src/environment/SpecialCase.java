@@ -26,7 +26,7 @@ public class SpecialCase {
 
     /**
      * Indique le type d'effet de cette case
-     * @return
+     * @return Le type de cette case
      */
     public CaseType getType() {
         return type;
@@ -34,7 +34,7 @@ public class SpecialCase {
 
     /**
      * Renvoie la couleur associée à cette case
-     * @return
+     * @return La couleur de cette case
      */
     public Color getColor() {
         return color;
@@ -42,7 +42,7 @@ public class SpecialCase {
 
     /**
      * renvoie l'abscisse de cette case
-     * @return
+     * @return L'abscisse de cette case
      */
     public int getAbsc() {
         return absc;

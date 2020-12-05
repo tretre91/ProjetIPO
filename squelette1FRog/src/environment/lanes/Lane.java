@@ -20,10 +20,10 @@ public class Lane {
     protected boolean leftToRight;
     protected double density;
     protected ArrayList<SpecialCase> specialCases = new ArrayList<>();
-    protected Color bacgroundColor = null;
+    protected Color backgroundColor = null;
 
     /**
-     * Crée une voie
+     * Crée une voie vide
      *
      * @param game La partie de jeu liée à l'environnement de la voie
      * @param ord  L'ordonnée de la voie
@@ -43,13 +43,20 @@ public class Lane {
         }
     }
 
-    public Lane(Game game, int ord, Color bacgroundColor){
+    /**
+     * Crée une voie vide avec une couleur de fond donnée
+     *
+     * @param game            La partie de jeu liée à l'environnement de la voie
+     * @param ord             L'ordonnée de la voie
+     * @param backgroundColor La couleur d'arrière plan de la voie
+     */
+    public Lane(Game game, int ord, Color backgroundColor) {
         this(game, ord);
-        this.bacgroundColor = bacgroundColor;
+        this.backgroundColor = backgroundColor;
     }
 
     /**
-     * Ajoute des voitures selon la densité de la voie et sans les afficher
+     * Ajoute des obstacles selon la densité de la voie et sans les afficher
      */
     protected void initialize() {
         for (int i = 0; i < game.width; i++) {
@@ -59,13 +66,13 @@ public class Lane {
     }
 
     /**
-     * Affiche une voie
+     * Affiche une voie et met à jour ses obstacles
      */
     public void update() {
         // affichage de l'arrière plan
-        if (bacgroundColor != null) {
+        if (backgroundColor != null) {
             for (int i = 0; i < game.width; i++)
-                game.getGraphic().add(new Element(i, ord, bacgroundColor));
+                game.getGraphic().add(new Element(i, ord, backgroundColor));
         }
 
         // Toutes les voitures se déplacent d'une case au bout d'un nombre "tic
@@ -90,7 +97,7 @@ public class Lane {
         }
         mayAddObstacle();
         for (SpecialCase s : specialCases) game.getGraphic().add(new Element(s.getAbsc(), ord, s.getColor()));
-        for (Obstacle o: obstacles) o.display();
+        for (Obstacle o : obstacles) o.display();
     }
 
     /**
@@ -130,13 +137,13 @@ public class Lane {
      */
     public void addOrd(int ord) {
         this.ord += ord;
-        for (Obstacle o: obstacles) o.setOrd(this.ord);
+        for (Obstacle o : obstacles) o.setOrd(this.ord);
     }
 
     /**
      * Renvoie l'ordonnée (relative à la fenêtre) de cette voie
      *
-     * @return
+     * @return L'ordonnée de cette voie
      */
     public int getOrd() {
         return ord;
@@ -151,7 +158,8 @@ public class Lane {
      * de la voie est vide, cette méthode est redéfinie dans les classes filles (cela permet de créer des
      * voies vides grâce à la classe Lane)
      */
-    protected void mayAddObstacle() { }
+    protected void mayAddObstacle() {
+    }
 
     /**
      * Donne la première case de la voie

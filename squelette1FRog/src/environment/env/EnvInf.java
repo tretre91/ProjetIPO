@@ -1,12 +1,13 @@
 package environment.env;
 
-import environment.lanes.*;
+import environment.lanes.CarLane;
+import environment.lanes.Lane;
+import environment.lanes.WaterLane;
 import gameCommons.Game;
 import gameCommons.IEnvironment;
 import util.Case;
 import util.Direction;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.BitSet;
 
@@ -19,8 +20,12 @@ public class EnvInf implements IEnvironment {
     private int frogHeight;
     private boolean leftToRight;
 
-
-    public EnvInf(Game game){
+    /**
+     * Crée un environnement de jeu infini
+     *
+     * @param game La partie de jeu qui utilisera cet environnement
+     */
+    public EnvInf(Game game) {
         this.game = game;
         this.leftToRight = false;
         this.frogHeight = game.getFrogInitialHeight();
@@ -33,7 +38,7 @@ public class EnvInf implements IEnvironment {
     }
 
     /**
-     * Ajoute entre 1 et 3 voies à la fin de 'lanes'
+     * Ajoute entre 1 et 3 voies de route ou bien 2 à 4 voies d'eau (plus 2 voies de transition) à la fin de 'lanes'
      */
     private void pushBackLanes() {
         int nbOfLanes;
@@ -59,7 +64,7 @@ public class EnvInf implements IEnvironment {
     }
 
     public BitSet isSafe(Case c) {
-        // on considère les cases hors de la grille comme safe (la grenouille ne pourra dans tous les cas pas s'y déplacer
+        // on considère les cases hors de la grille comme safe (la grenouille ne pourra dans tous les cas pas s'y déplacer)
         if (c.ord <= game.getFrogInitialHeight() || c.absc < 0 || c.absc >= game.width) return new BitSet(5);
         else return lanes.get(c.ord - (game.getFrogInitialHeight() + 1)).isSafe(c);
     }
@@ -69,19 +74,19 @@ public class EnvInf implements IEnvironment {
     }
 
     public void update() {
-        for (Lane l: lanes) l.update();
+        for (Lane l : lanes) l.update();
     }
 
     public void move(Direction d) {
-        if(d == Direction.up) {
+        if (d == Direction.up) {
             frogHeight++;
-            for (Lane l: lanes) l.addOrd(-1);
+            for (Lane l : lanes) l.addOrd(-1);
             while (frogHeight > lanes.size() - game.height) {
-               pushBackLanes();
+                pushBackLanes();
             }
         } else if (d == Direction.down && frogHeight > game.getFrogInitialHeight()) {
             frogHeight--;
-            for (Lane l: lanes) l.addOrd(1);
+            for (Lane l : lanes) l.addOrd(1);
         }
     }
 }

@@ -52,12 +52,15 @@ public class Game {
     /**
      * Lie l'objet frog à la partie
      *
-     * @param frog
+     * @param frog Une grenouille implémentant 'IFrog'
      */
     public void setFrog(IFrog frog) {
         this.frog = frog;
     }
 
+    /**
+     * @return La grenouille liée à cette partie
+     */
     public IFrog getFrog() {
         return frog;
     }
@@ -65,7 +68,7 @@ public class Game {
     /**
      * Lie l'objet environment à la partie
      *
-     * @param environment
+     * @param environment Un environnement implémentant 'IEnvironment'
      */
     public void setEnvironment(IEnvironment environment) {
         this.environment = environment;
@@ -86,25 +89,25 @@ public class Game {
      */
     public boolean testLose() {
         BitSet caseStatus = environment.isSafe(frog.getPosition());
-        if (caseStatus.get(3)) {
+        if (caseStatus.get(3)) { // case mur
             switch (frog.getDirection()) {
                 case up -> frog.move(Direction.down);
                 case down -> frog.move(Direction.up);
                 case left -> frog.move(Direction.right);
                 case right -> frog.move(Direction.left);
             }
-        } else if (caseStatus.get(0) || caseStatus.get(1)) {
+        } else if (caseStatus.get(0) || caseStatus.get(1)) { // case pas safe ou piège
             String time = "temps: " + ((System.nanoTime() - playTime) / (long) 1e9) + "s";
             if (frog.getScore() == -1) graphic.endGameScreen("YOU DIED\n" + time);
             else graphic.endGameScreen("YOU DIED\nscore: " + frog.getScore() + " (+" + bonusScore + ")\n" + time);
             isOver = true;
             return true;
-        } else if (caseStatus.get(2)) {
+        } else if (caseStatus.get(2)) { // case glace
             if (!((frog.getDirection() == Direction.left && frog.getPosition().absc == 0)
                     || (frog.getDirection() == Direction.right && frog.getPosition().absc == width - 1))) {
                 frog.move(frog.getDirection());
             }
-        } else if (caseStatus.get(4)) {
+        } else if (caseStatus.get(4)) { // case bonus
             bonusScore++;
         }
         return false;
@@ -156,7 +159,7 @@ public class Game {
     /* *********** Méthodes nécessaires à la version infinie du jeu *********** */
 
     /**
-     * Déplace toutes les voies de l'environnement
+     * Déplace toutes les voies de l'environnement vers le haut ou vers le bas
      *
      * @param d La direction du déplacement (left et right n'ont pas d'effet)
      */
