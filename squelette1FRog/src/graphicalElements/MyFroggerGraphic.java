@@ -22,7 +22,7 @@ public class MyFroggerGraphic extends JPanel implements IFroggerGraphics, KeyLis
     public MyFroggerGraphic(int width, int height) {
         this.width = width;
         this.height = height;
-        elementsToDisplay = new ArrayList<Element>();
+        elementsToDisplay = new ArrayList<>();
 
         setBackground(Color.GRAY);
         setPreferredSize(new Dimension(width * pixelByCase, height * pixelByCase));
@@ -37,21 +37,26 @@ public class MyFroggerGraphic extends JPanel implements IFroggerGraphics, KeyLis
     }
 
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+
+        super.paintComponent(g2d);
+
         for (Element e : elementsToDisplay) {
-            g.setColor(e.color);
+            g2d.setColor(e.color);
             if(e.color == Color.orange) {
-                g.fillOval(pixelByCase * e.absc, pixelByCase * (height - 1 - e.ord), pixelByCase, pixelByCase - 1);
+                g2d.fillOval(pixelByCase * e.absc, pixelByCase * (height - 1 - e.ord), pixelByCase, pixelByCase - 1);
             } else if (e.color == Game.transitionLaneColor || e.color == Game.waterColor) {
-                g.fillRect(pixelByCase * e.absc, pixelByCase * (height - 1 - e.ord), pixelByCase, pixelByCase);
+                g2d.fillRect(pixelByCase * e.absc, pixelByCase * (height - 1 - e.ord), pixelByCase, pixelByCase);
             } else {
-                g.fillRect(pixelByCase * e.absc, pixelByCase * (height - 1 - e.ord), pixelByCase, pixelByCase - 1);
+                g2d.fillRect(pixelByCase * e.absc, pixelByCase * (height - 1 - e.ord), pixelByCase, pixelByCase - 1);
             }
         }
         if (frog != null && frog.getScore() != -1) {
-            g.setFont(new Font("Verdana", Font.BOLD, 15));
-            g.setColor(Color.white);
-            g.drawString("Score : " + frog.getScore(), 0, 15);
+            g2d.setFont(new Font("Verdana", Font.BOLD, 15));
+            g2d.setColor(Color.white);
+            g2d.drawString("Score : " + frog.getScore(), 0, 15);
         }
     }
 
