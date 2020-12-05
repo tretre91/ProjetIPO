@@ -11,6 +11,12 @@ Page github de mon projet d'IPO (Trévis Morvany)
   - [X] cases spéciales (piège, glace, mur et bonus, <a href=https://github.com/tretre91/ProjetIPO/tree/b70916ff0d620f2181d1fe2d90a95bece126f586/squelette1FRog/src>lien</a>)
   - [X] lignes d'eau (<a href=https://github.com/tretre91/ProjetIPO/tree/4e05830409f266b61057a92087e47c28fcc43d6b>lien</a>)
   - <a href=https://github.com/tretre91/ProjetIPO/tree/67bede4f3f65cdcae3bb54b3572edc8e6607b67a>A la fin de la partie 4</a>
+- Partie 5
+  - Modification de l'interface graphique
+    - Modification de l'affichage de l'écran de fin de partie pour pouvoir afficher plusieurs lignes
+    - Affichage du score pendant la partie
+    - Affichage des cases bonus sous forme de cercle au lieu d'un carré
+    - Ajout d'anti-aliasing
 
 ## Bugs / problèmes
 ### mineurs
