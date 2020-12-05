@@ -1,9 +1,8 @@
 package environment.elements;
 
-import java.awt.Color;
-
-import util.Case;
 import gameCommons.Game;
+
+import java.awt.*;
 
 public class Car extends Obstacle {
 

@@ -59,7 +59,7 @@ public class Lane {
      * Ajoute des obstacles selon la densité de la voie et sans les afficher
      */
     protected void initialize() {
-        for (int i = 0; i < game.width; i++) {
+        for (int i = 0; i < 2 * game.width; i++) {
             for (Obstacle o : obstacles) o.move();
             mayAddObstacle();
         }
