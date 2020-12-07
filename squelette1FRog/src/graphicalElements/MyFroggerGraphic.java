@@ -38,15 +38,15 @@ public class MyFroggerGraphic extends JPanel implements IFroggerGraphics, KeyLis
 
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-
         super.paintComponent(g2d);
 
         for (Element e : elementsToDisplay) {
             g2d.setColor(e.color);
             if(e.color == Color.orange) {
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 g2d.fillOval(pixelByCase * e.absc, pixelByCase * (height - 1 - e.ord), pixelByCase, pixelByCase - 1);
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
             } else if (e.color == Game.transitionLaneColor || e.color == Game.waterColor) {
                 g2d.fillRect(pixelByCase * e.absc, pixelByCase * (height - 1 - e.ord), pixelByCase, pixelByCase);
             } else {
@@ -54,7 +54,7 @@ public class MyFroggerGraphic extends JPanel implements IFroggerGraphics, KeyLis
             }
         }
         if (frog != null && frog.getScore() != -1) {
-            g2d.setFont(new Font("Verdana", Font.BOLD, 15));
+            g2d.setFont(new Font("Verdana", Font.PLAIN, 15));
             g2d.setColor(Color.white);
             g2d.drawString("Score : " + frog.getScore(), 0, 15);
         }
